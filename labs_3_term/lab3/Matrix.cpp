@@ -1,23 +1,32 @@
 #include "Matrix.h"
 #include <iostream>
-#include <iomanip>
 #include <cstdlib>
+#include <iomanip>
 #include <sstream>
 #include <algorithm>
 
 using namespace std;
 
-Matrix::Matrix(int x_size, int y_size, bool randomize = false) : x_size(x_size), y_size(y_size), matrix(new double*[x_size])
+Matrix::Matrix(int x_size, int y_size, double min_rand, double max_rand) : x_size(x_size), y_size(y_size), matrix(new double*[x_size])
 {
 	srand(time(NULL));
 	for (int i = 0; i < x_size; i++) {
 		matrix[i] = new double[y_size];
 		for (int j = 0; j < y_size; j++)
 		{
-			if (randomize)
-				matrix[i][j] = fRand(0.0, 100.0);
-			else
-				matrix[i][j] = 0;
+			matrix[i][j] = fRand(min_rand, max_rand);
+		}
+	}
+}
+
+Matrix::Matrix(int x_size, int y_size) : x_size(x_size), y_size(y_size), matrix(new double*[x_size])
+{
+	srand(time(NULL));
+	for (int i = 0; i < x_size; i++) {
+		matrix[i] = new double[y_size];
+		for (int j = 0; j < y_size; j++)
+		{
+			matrix[i][j] = 0;
 		}
 	}
 }
@@ -72,6 +81,7 @@ void Matrix::sort_arr()
 			this->matrix[i][j] = junk_array[i*this->x_size + j];
 		}
 	}
+	delete[] junk_array;
 }
 
 bool Matrix::equals(const Matrix & matrix)
@@ -100,17 +110,17 @@ double Matrix::fRand(double fMin, double fMax)
 
 
 
-void show(const Matrix & matrix) {
+void Matrix::show() {
 	std::stringstream stream;
 	int precision = 4, width = 8;
 	stream.precision(precision);
 	stream << std::endl;
 
-	for (int i = 0; i < matrix.x_size; i++)
+	for (int i = 0; i < this->x_size; i++)
 	{
-		for (int j = 0; j < matrix.y_size; j++)
+		for (int j = 0; j < this->y_size; j++)
 		{
-			stream << setw(width) << matrix.matrix[i][j] << " ";
+			stream << setw(width) << this->matrix[i][j] << " ";
 		}
 		stream << std::endl;
 

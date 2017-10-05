@@ -6,11 +6,12 @@ class Proxy;
 class Matrix
 {
 public:
-	Matrix(int, int, bool);
+	Matrix(int, int, double, double);
+	Matrix(int, int);
 	Matrix(const Matrix&);
 	~Matrix();
 	Proxy operator[](int i);
-	friend void show(const Matrix & matrix);
+	void show();
 	void sort_arr();
 	bool equals(const Matrix & matrix);
 private:

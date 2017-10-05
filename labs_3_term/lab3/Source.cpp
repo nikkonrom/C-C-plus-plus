@@ -2,15 +2,14 @@
 #include <cstdlib>
 #include "Matrix.h"
 
-inline const Matrix rethrow_copy(const Matrix);
-inline const Matrix& rethrow_reference(const Matrix &);
-inline const Matrix * rethrow_by_pointer(const Matrix *);
+inline  Matrix rethrow_copy( Matrix);
+inline  Matrix& rethrow_reference( Matrix &);
+inline  Matrix * rethrow_by_pointer( Matrix *);
 
 int main() {
 
-	Matrix matrix(5, 5, true), equals_test(3, 5, false);
-
-	show(matrix);
+	Matrix matrix(5, 5, 0, 100), equals_test(3, 5);
+	matrix.show();
 	matrix[1][10] = 1.3;
 
 	double sample = 0;
@@ -20,15 +19,15 @@ int main() {
 	sample = matrix[1][1];
 	std::cout << "Sample(in range): " << sample << std::endl;
 	matrix[1][1] = 14.88;
-	show(matrix);
+	matrix.show();
 
 
 	matrix.sort_arr();
 
 
-	show(rethrow_reference(matrix));
-	show(*rethrow_by_pointer(&matrix));
-	show(rethrow_copy(matrix));
+	rethrow_reference(matrix).show();
+	rethrow_by_pointer(&matrix)->show();
+	rethrow_copy(matrix).show();
 
 	Matrix equals_test2(equals_test);
 	if (equals_test.equals(equals_test2))
@@ -40,14 +39,14 @@ int main() {
 }
 
 
-inline const Matrix rethrow_copy(const Matrix source) {
+inline  Matrix rethrow_copy( Matrix source) {
 	return source;
 }
 
-inline const Matrix & rethrow_reference(const Matrix & source) {
+inline  Matrix & rethrow_reference( Matrix & source) {
 	return	source;
 }
 
-inline const Matrix * rethrow_by_pointer(const Matrix * source) {
+inline  Matrix * rethrow_by_pointer( Matrix * source) {
 	return source;
 }
