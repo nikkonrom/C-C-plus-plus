@@ -7,7 +7,9 @@ Dormitory::Dormitory()
 }
 
 Dormitory::Dormitory(int number, std::string street, int numberOfApartments, bool isAdmittedToStudents) 
-	: BlockOfFlats(number, street, numberOfApartments), isAdmittedToStudents(isAdmittedToStudents)
+	: BlockOfFlats(number, street, numberOfApartments), 
+	House(number, street),
+	isAdmittedToStudents(isAdmittedToStudents)
 {
 }
 

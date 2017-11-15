@@ -13,12 +13,16 @@ inline std::ostream& operator<<(std::ostream & os, Facade source) {
 	{
 	case CommonFacade:
 		os << "CommonFacade";
+		break;
 	case GlassFacade:
 		os << "GlassFacade";
+		break;
 	case CPBFacade:
 		os << "CPBFacade";
+		break;
 	case AeratedConcreteFacade:
 		os << "AeratedConcreteFacade";
+		break;
 	default:
 		break;
 	}

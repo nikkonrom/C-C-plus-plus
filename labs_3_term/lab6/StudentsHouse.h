@@ -9,7 +9,7 @@ public:
 	StudentsHouse(int number, std::string street, double yardSquare, int numberOfApaprtments,
 		bool isAdmittedToStudents, Facade facade, std::string timetable);
 	~StudentsHouse ();
-	void Show();
+	void Show() override;
 private:
 	std::string timetable;
 };

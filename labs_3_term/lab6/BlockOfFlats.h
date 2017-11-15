@@ -6,7 +6,7 @@ class BlockOfFlats :
 public:
 	BlockOfFlats();
 	BlockOfFlats(int number, std::string street, int numberOfApaprtments);
-	virtual void Show();
+	virtual void Show() override;
 	~BlockOfFlats();
 protected:
 	int numberOfApaprtments;
