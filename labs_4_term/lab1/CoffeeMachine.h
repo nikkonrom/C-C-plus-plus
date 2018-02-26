@@ -19,10 +19,11 @@ public:
 
 	int get_balance() const;
 	void add_money(int amount);
-	bool check_money(CoffeeSort item) const;
+	bool check_money(const CoffeeSort& item) const;
+	std::vector<CoffeeSort> get_available_sorts();
 
-	std::string make_coffee(CoffeeSort item);
-	bool make_espresso();
+	std::string make_coffee(const CoffeeSort& item);
+	
 	~CoffeeMachine();
 };
 

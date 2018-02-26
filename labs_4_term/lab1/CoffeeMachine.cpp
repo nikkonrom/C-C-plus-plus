@@ -33,6 +33,11 @@ bool CoffeeMachine::check_money(const CoffeeSort& item) const
 	return this->balance - item.get_price() >= 0;
 }
 
+std::vector<CoffeeSort> CoffeeMachine::get_available_sorts()
+{
+	return this->available_sorts;
+}
+
 std::string CoffeeMachine::make_coffee(const CoffeeSort& item)
 {
 	if (check_money(item))
@@ -50,6 +55,7 @@ std::string CoffeeMachine::make_coffee(const CoffeeSort& item)
 			this->balance -= item.get_price();
 			return "Enjoy your " + item.get_name() + "! Have a good day :)";
 		}
+		return "Sorry, not enough products, please change other sort :(";
 	}
 	return "Sorry, not enough money :(";
 
