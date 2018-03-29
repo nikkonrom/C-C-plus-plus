@@ -26,6 +26,7 @@ int main()
 		case '-':
 		{
 			child_process_delete(processes);
+			break;
 		}
 		case 'q':
 		{
@@ -33,7 +34,7 @@ int main()
 			{
 				child_process_delete(processes);
 			}
-			break;
+			return 0;
 		}
 		}
 	}
@@ -45,11 +46,11 @@ int main()
 int child_process_create(std::stack<PROCESS_INFORMATION*>* processes)
 {
 	STARTUPINFO si;
-	PROCESS_INFORMATION pi;
+	PROCESS_INFORMATION* pi = new PROCESS_INFORMATION;
 	ZeroMemory(&si, sizeof(si));
 	si.cb = sizeof(si);
-	ZeroMemory(&pi, sizeof(pi));
-	(*processes).push(&pi);
+	ZeroMemory(pi, sizeof(pi));
+	
 	if (!CreateProcessA(nullptr,					// No module name (use command line)
 		&std::string("file_child.exe ").append(std::to_string((*processes).size()))[0],	// Command line
 		nullptr,					// Process handle not inheritable
@@ -59,13 +60,14 @@ int child_process_create(std::stack<PROCESS_INFORMATION*>* processes)
 		nullptr,					// Use parent's environment block
 		nullptr,					// Use parent's starting directory 
 		&si,					// Pointer to STARTUPINFO structure
-		&pi)					// Pointer to PROCESS_INFORMATION structure
+		pi)					// Pointer to PROCESS_INFORMATION structure
 		)
 	{
-		(*processes).pop();
+		
 		printf("CreateProcess failed (%lu)\n", GetLastError());
 		return -1;
 	}
+	(*processes).push(pi);
 	return 0;
 }
 
